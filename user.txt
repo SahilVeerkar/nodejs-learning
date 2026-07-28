@@ -1,1 +1,1 @@
-{"username":"veerkar"}
+Name:s age:12 city:a
