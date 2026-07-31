@@ -35,7 +35,7 @@ req.on("end",()=>{
   const buffer=Buffer.concat(body).toString();
   const params=new URLSearchParams(buffer);
   const realData=Object.fromEntries(params);
-  fs.appendFile('user.txt2',`Name:${realData.name} age:${realData.age} city:${realData.city}`, (err)=>{
+  fs.writeFile('user.txt',`Name:${realData.name} age:${realData.age} city:${realData.city}`, (err)=>{
     if(err){
     console.log(err);
     return res.end("something went wrong")}
@@ -55,7 +55,7 @@ console.log(realData);
   }
 
   if(req.url==="/users" && req.method==="GET"){
-    fs.readFile('user.txt2',"utf-8",(err,data)=>{
+    fs.readFile('user.txt',"utf-8",(err,data)=>{
       if(err){
         console.log(err);
         return res.end("something went wrong");
