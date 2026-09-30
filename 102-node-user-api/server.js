@@ -12,10 +12,43 @@ const server=http.createServer((req,res)=>{
         console.log("file is not exist");
         return;
       }
-     res.end(data);
+      res.end(data);
     })
     
   }
+  else if (req.method === "POST" && req.url === "/user") {
+    let body="";
+    req.on('data',(chunks)=>{
+      body+=chunks;
+    }
+  
+  )
+    req.on('end',()=>{
+     
+     console.log(body); 
+     const user=JSON.parse(body);
+     console.log(user);
+     fs.readFile('user.json','utf8',(err,data)=>{
+      if(err){
+        console.log("file is not exist");
+        return;
+      }
+     const users=JSON.parse(data);
+     users.push(user);
+     fs.writeFile("user.json", JSON.stringify(users), (err) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+
+  console.log("User saved successfully");
+  res.statusCode = 201;
+res.end("User created successfully");
+});
+     
+     })
+    })
+}
   else {
     res.statusCode = 404;
     res.end("route not found");
