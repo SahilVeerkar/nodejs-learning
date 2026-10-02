@@ -10,7 +10,9 @@ app.use(userRouter);
 app.use(hostRouter);
 
 
-
+app.use((req,res,next)=>{
+  res.status(404).send(`<h1>404 your page i not found on arbnb</h1>`);
+})
 
 
 const PORT =3000;
