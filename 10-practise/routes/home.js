@@ -4,7 +4,9 @@ const homeRouter = express.Router();
 
 homeRouter.get("/", (req, res) => {
   res.render("home", {
-    name: "Sahil"
+    name: "Sahil",
+    age:"23",
+    city:"Indore"
   });
 });
 
