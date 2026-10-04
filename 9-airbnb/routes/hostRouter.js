@@ -10,15 +10,18 @@ const rootDir=require("../Utils/pathUtils")
 
 hostRouter.get("/host/add-home",(req,res,next)=>{
   
-  res.render('add-home',{pageTitle:'Add Home to airbnb'}); 
+  res.render('add-home',{pageTitle:'Add Home to airbnb', currentpage: "HomeAdded"
+  }); 
 })
 
 const registeredHomes =[];
 
 hostRouter.post("/host/add-home",(req,res,next)=>{
- 
- registeredHomes.push({houseName: req.body.houseName});
-    res.render('home-added',{pageTitle:'Home Added Successfully'});
+ console.log(req.body);
+
+ registeredHomes.push(req.body);
+
+    res.render('home-added',{pageTitle:'Home Added Successfully',currentpage: "HomeAdded"});
 })
 
 exports.hostRouter=hostRouter;

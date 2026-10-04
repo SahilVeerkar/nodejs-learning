@@ -7,7 +7,7 @@
         <li>
           <a
             href="/"
-            class="hover:bg-red-400 py-2 px-4 rounded transition duration-300"
+            class="<%= currentpage === 'Home' ? 'bg-red-400' : 'hover:bg-red-400' %>  py-2 px-4 rounded transition duration-300"
           >
             Go to Home
           </a>
@@ -16,7 +16,7 @@
         <li>
           <a
             href="/host/add-home"
-            class="hover:bg-red-400 py-2 px-4 rounded transition duration-300"
+            class="<%= currentpage === 'HomeAdded' ? 'bg-red-400' : 'hover:bg-red-400' %>  py-2 px-4 rounded transition duration-300"
           >
             Add Home
           </a>
