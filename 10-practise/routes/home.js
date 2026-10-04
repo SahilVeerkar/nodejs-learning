@@ -1,10 +1,11 @@
-const express= require("express");
-const homeRouter=express.Router();
+const express = require("express");
 
-const path = require('path');
+const homeRouter = express.Router();
 
-homeRouter.get("/",(req,res)=>{
-  res.sendFile(path.join(__dirname,'../','/public','index.html'));
+homeRouter.get("/", (req, res) => {
+  res.render("home", {
+    name: "Sahil"
+  });
 });
 
-module.exports=homeRouter;
+module.exports = homeRouter;
