@@ -8,15 +8,18 @@ const hostRouter= express.Router();
 //local module
 const rootDir=require("../Utils/pathUtils")
 
-hostRouter.get("/add-home",(req,res,next)=>{
+hostRouter.get("/host/add-home",(req,res,next)=>{
   
-  res.sendFile(path.join(rootDir,'views','add-home.html')); 
+  res.render('add-home',{pageTitle:'Add Home to airbnb'}); 
 })
 
-hostRouter.post("/add-home",(req,res,next)=>{
+const registeredHomes =[];
+
+hostRouter.post("/host/add-home",(req,res,next)=>{
  
-
-    res.sendFile(path.join(rootDir,'views','home-added.html'));  
+ registeredHomes.push({houseName: req.body.houseName});
+    res.render('home-added',{pageTitle:'Home Added Successfully'});
 })
 
-module.exports=hostRouter;
+exports.hostRouter=hostRouter;
+exports.registeredHomes=registeredHomes;
