@@ -16,15 +16,16 @@ exports.postAddHome=(req,res,next)=>{
  res.render('host/home-added',{pageTitle:'Home Added Successfully',currentpage: "HomeAdded"});
 }
 
-exports.getHomes=(req,res,next)=>{
+exports.getHostHomes=(req,res,next)=>{
    Home.fetchAll((registeredHomes)=>
-    res.render("store/home-list",{registeredHomes:registeredHomes,
-    pageTitle:"airbnb Home",
-    currentpage:"Home",
+    res.render("host/host-home-list",{registeredHomes:registeredHomes,
+    pageTitle:"Host Home List",
+    currentpage:"host-homes",
      })
 
    );
  
  
 }
+
 
