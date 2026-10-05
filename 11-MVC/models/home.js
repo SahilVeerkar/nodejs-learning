@@ -1,8 +1,7 @@
 const fs= require('fs');
 const path= require('path');
 const rootDir = require('../Utils/pathUtils');
-const registeredHomes=[];
-console.log("registeredHomes loaded:", registeredHomes);
+
 
 
 module.exports =class Home{
@@ -15,14 +14,26 @@ module.exports =class Home{
     this.photoURL=photoURL;
   }
   save(){
-    registeredHomes.push(this);
+   Home.fetchAll((registeredHomes)=>{
+  registeredHomes.push(this);
     
     const homeDataPath=path.join(rootDir,'data','home.json');
     fs.writeFile(homeDataPath,JSON.stringify(registeredHomes),error=>{
-      console.log("file writing concluded",error); 
+      
     })
+    })
+  
   }
-  static fetchAll(){
-  return registeredHomes;
+  static fetchAll(callback){
+const homeDataPath=path.join(rootDir,'data','home.json');
+fs.readFile(homeDataPath,(err,data)=>{
+  
+  callback(!err ?JSON.parse(data) : callback([])); 
+ 
+
+ 
+})
+
+ 
   }
   }
