@@ -20,10 +20,10 @@ app.use(hostRouter);
 app.use(express.static(path.join(rootDir,'public')))
 
 
-app.use(get404); 
+app.use(get404);
 
 
-const PORT =3000;
+const PORT =3001;
 app.listen(PORT,()=>{
   console.log(`server running on address http://localhost:${PORT}`);
 })
