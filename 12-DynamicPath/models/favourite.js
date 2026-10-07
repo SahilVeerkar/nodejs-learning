@@ -8,15 +8,15 @@
   module.exports =class Favourite{
 
     static addToFavourite(homeId,callback){
-      console.log("??")
+      
     Favourite.getFavourite((favourite)=>{
-      console.log("..1")
+     
       if(favourite.includes(homeId)){
         callback("home is already marked in favourite");
         
       }
       else{
-        console.log("..2")
+       
   favourite.push(homeId);
   fs.writeFile(favouriteDataPath, JSON.stringify(favourite),callback);
       }
