@@ -7,7 +7,7 @@
         Here are your favourites:
       </h2>
       <div class="flex flex-wrap justify-center gap-6">
-        <% registeredHomes.forEach(home => { %>
+        <% favouriteHomes.forEach(home => { %>
           <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 w-full max-w-sm">
             <img src="<%= home.photoURL%>" 
             alt="<%= home.houseName %>" class="w-50 h-30 object-cover">
@@ -25,7 +25,7 @@
                   <span class="text-gray-700"><%= home.rating %></span>
                 </div>
               </div>
-              <button class="bg-green-500 p-2">Book</button>
+             
             </div>
           </div>
         <% }) %>
