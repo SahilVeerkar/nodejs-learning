@@ -5,13 +5,15 @@ const storeRouter = express.Router();
 //local module
 
 
-const homeController=require("../controllers/storeController")
+const storeController=require("../controllers/storeController")
 
 
-storeRouter.get("/",homeController.getIndex);
-storeRouter.get("/booking",homeController.getBooking);
-storeRouter.get("/homes",homeController.getHomes);
-storeRouter.get("/favourite",homeController.getFavouriteList);
-storeRouter.get("/homes/:homeId",homeController.getHomeDetails);
+storeRouter.get("/",storeController.getIndex);
+storeRouter.get("/booking",storeController.getBooking);
+storeRouter.get("/homes",storeController.getHomes);
+storeRouter.get("/favourite",storeController.getFavouriteList);
+storeRouter.get("/homes/:homeId",storeController.getHomeDetails);
+storeRouter.post("/favourite",storeController.postAddToFavourite);
+
   
 module.exports = storeRouter;
