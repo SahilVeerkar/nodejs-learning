@@ -38,7 +38,7 @@ exports.postAddHome=(req,res,next)=>{
  const home= new Home(houseName,price,location,rating,photoURL);
  home.save();
 
- res.render('host/home-added',{pageTitle:'Home Added Successfully',currentpage: "HomeAdded"});
+ res.redirect('/host-home-list');
 }
 
 exports.getHostHomes=(req,res,next)=>{
@@ -51,6 +51,17 @@ exports.getHostHomes=(req,res,next)=>{
    );
  
  
+}
+
+exports.postEditHome=(req,res,next)=>{
+ 
+ const{id, houseName,price,location,rating,photoURL}=req.body;
+
+ const home= new Home(houseName,price,location,rating,photoURL);
+ home.id=id;
+ home.save();
+
+ res.redirect('/host-home-list');
 }
 
 
