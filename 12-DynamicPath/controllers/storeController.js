@@ -61,6 +61,19 @@ exports.postAddToFavourite=(req,res,next)=>{
    })
   
 }
+
+exports.postRemoveFromFavourite=(req,res,next)=>{
+   
+const homeId=req.params.homeId;
+Favourite.deleteById(homeId,error=>{
+  if(error){
+    console.log("error while removing from favourite",error);
+  }
+  res.redirect("/favourite");
+})
+  
+}
+
 exports.getHomeDetails=(req,res,next)=>{
  const homeId=req.params.homeId;
 
@@ -86,4 +99,9 @@ currentpage:"Home"
  })
 
 }
+
+
+
+
+
  

@@ -31,6 +31,16 @@
   })
 
     }
+
+       static deleteById(delHomeId,callback){
+     Favourite.getFavourite(homeIds=>{
+      homeIds=homeIds.filter(homeId=>
+         delHomeId!==homeId )
+           fs.writeFile(favouriteDataPath,JSON.stringify(homeIds),callback);
+      })
+      }
+
+       
     }
   
   

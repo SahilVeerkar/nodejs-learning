@@ -1,6 +1,7 @@
 const fs= require('fs');
 const path= require('path');
 const rootDir = require('../Utils/pathUtils');
+const Favourite = require('./favourite');
 const homeDataPath=path.join(rootDir,'data','home.json');
 
 
@@ -57,7 +58,9 @@ fs.readFile(homeDataPath,(err,data)=>{
  this.fetchAll(homes=>{
   homes=homes.filter(home=>
      home.id!==homeId )
-       fs.writeFile(homeDataPath,JSON.stringify(homes),callback);
+       fs.writeFile(homeDataPath,JSON.stringify(homes),error=>{
+        Favourite.deleteById(homeId,callback);
+       });
   })
   }
   }

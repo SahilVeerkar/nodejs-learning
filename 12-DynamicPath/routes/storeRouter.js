@@ -12,6 +12,7 @@ storeRouter.get("/",storeController.getIndex);
 storeRouter.get("/booking",storeController.getBooking);
 storeRouter.get("/homes",storeController.getHomes);
 storeRouter.get("/favourite",storeController.getFavouriteList);
+storeRouter.post("/favourites/delete/:homeId",storeController.postRemoveFromFavourite);
 storeRouter.get("/homes/:homeId",storeController.getHomeDetails);
 storeRouter.post("/favourite",storeController.postAddToFavourite);
 
