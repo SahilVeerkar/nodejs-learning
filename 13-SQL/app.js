@@ -8,14 +8,8 @@ const storeRouter=require("./routes/storeRouter");
 const {hostRouter}=require("./routes/hostRouter");
 const rootDir=require("./Utils/pathUtils")
 const {get404}=require("./controllers/404");
-const db= require("./Utils/dataBaseUtil");
-db.execute('SELECT * FROM homes')
-.then(([rows,fields])=>{
-  console.log("getting from db",rows);
-})
-.catch(error=>{
-  console.log("error while reading homes ",error);
-})
+
+
 const app = express();
 app.set('view engine','ejs');   
 app.set('views','views');

@@ -1,68 +1,43 @@
-const fs= require('fs');
-const path= require('path');
-const rootDir = require('../Utils/pathUtils');
-const Favourite = require('./favourite');
-const homeDataPath=path.join(rootDir,'data','home.json');
 
+const db= require("../Utils/dataBaseUtil");
 
 
 module.exports =class Home{
 
-  constructor(houseName,price,location,rating,photoURL){
+  constructor(houseName,price,location,rating,photoURL,desciption,id){
     this.houseName=houseName;
     this.price=price;
     this.location=location;
     this.rating=rating;
     this.photoURL=photoURL;
+    this.desciption=desciption;
+    this.id=id;
   }
   save(){
-  
-    
-
-   Home.fetchAll((registeredHomes)=>{
-      if(this.id){
-registeredHomes=registeredHomes.map(home=>
-   home.id===this.id ? this : home)
-  
+    if(this.id){
+return db.execute('UPDATE homes SET houseName=?,price=?,location=?,rating=?,photoURL=?,desciption=? WHERE id=?',[this.houseName,this.price,this.location,this.rating,this.photoURL,this.desciption]);
     }
+
     else{
-      this.id=Math.random().toString(); 
-        registeredHomes.push(this);
+return db.execute('INSERT INTO homes(houseName,price,location,rating,photoURL,desciption) VALUES(?,?,?,?,?,?)',[this.houseName,this.price,this.location,this.rating,this.photoURL,this.desciption]);
     }
-
+  
     
-    fs.writeFile(homeDataPath,JSON.stringify(registeredHomes),error=>{
-      
-    })
-    })
-  
-  }
-  static fetchAll(callback){
 
-fs.readFile(homeDataPath,(err,data)=>{
-  
-  callback(!err ?JSON.parse(data) : callback([])); 
- 
-})
+  }
+  static fetchAll( ){
+
+return db.execute('SELECT * FROM homes');
+
 
   }
 
-  static findById(homeId,callback){
-     this.fetchAll(homes=>{
-     const homeFound = homes.find(home=>home.id === homeId);
-     callback(homeFound);
-  })
+  static findById(homeId){
+     return db.execute('SELECT * FROM homes WHERE id=?',[homeId]);
   }
 
-   static deleteById(homeId,callback){
- this.fetchAll(homes=>{
-  homes=homes.filter(home=>
-     home.id!==homeId )
-       fs.writeFile(homeDataPath,JSON.stringify(homes),error=>{
-        Favourite.deleteById(homeId,callback);
-       });
-  })
-  }
+   static deleteById(homeId){
+ return db.execute('DELETE FROM homes WHERE id=?',[homeId]);
   }
 
- 
+}
