@@ -1,3 +1,4 @@
+const { Result } = require('postcss');
 const Favourite = require('../models/favourite');
 const Home = require('../models/home');
 
@@ -36,10 +37,10 @@ exports.getBooking=(req,res,next)=>{
 }
 
 exports.getFavouriteList=(req,res,next)=>{
-  Favourite.getFavourite(favourite=>{
-
-    Home.fetchAll().then(([registeredHomes])=>{
-      const favouriteHomes = registeredHomes.filter(home=>favourite.includes(home._id))
+  Favourite.getFavourite().then(favourites=>{
+favourites=favourites.map(fav=>fav.houseId);
+    Home.fetchAll().then(registeredHomes=>{
+      const favouriteHomes = registeredHomes.filter(home=>favourites.includes(home._id.toString()))
       res.render("store/favourite-list",{
         favouriteHomes:favouriteHomes,
     pageTitle:"my favourites",
@@ -52,13 +53,14 @@ exports.getFavouriteList=(req,res,next)=>{
 }
 
 exports.postAddToFavourite=(req,res,next)=>{
-   
-   Favourite.addToFavourite(req.body.id,error=>{
-    if(error){
-      console.log("error while marking favourite",error)
-    }
-    
-     res.redirect("/favourite");
+  const homeId= req.body.id;
+   const fav=new Favourite(homeId);
+   fav.save().then(result=>{
+    console.log("fav added:",result);
+   }).catch(err=>{
+console.log("error while marking favourite",err);
+   }).finally(()=>{ 
+res.redirect("/favourite");
    })
   
 }
@@ -66,12 +68,13 @@ exports.postAddToFavourite=(req,res,next)=>{
 exports.postRemoveFromFavourite=(req,res,next)=>{
    
 const homeId=req.params.homeId;
-Favourite.deleteById(homeId,error=>{
-  if(error){
-    console.log("error while removing from favourite",error);
-  }
-  res.redirect("/favourite");
-})
+Favourite.deleteById(homeId).then(result=>{
+    console.log("fav remove:",result);
+   }).catch(err=>{
+console.log("error while marking favourite",err);
+   }).finally(()=>{ 
+res.redirect("/favourite");
+   })
   
 }
 
